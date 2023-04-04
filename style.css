@@ -1,0 +1,385 @@
+:root {
+    --color-text: #fff;
+    --bg: #3a3a3a;
+    --bg-more: #5f5f5f;
+    --color: #0099ff;
+    --color-more: #f26c18;
+    --br-small: 10px;
+    --br: 15px;
+    --shadow: 0 10px 25px (rgba(0, 0, 0, 0.4));
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body.thema_light {
+    --color-text: #333;
+    --color-text-more: rgba(0,0,0,0.5);
+    --bg: #fff;
+    --bg-more:  #ececec;
+}
+
+body {
+    margin: 0;
+    font-family: arial;
+    color: var(--color-text);
+    background-color: var(--bg);
+    line-height: 1.4;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    margin: 0;
+}
+h2 {
+    margin-bottom: 25px;
+}
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+img,
+svg {
+    /* min-width: 100%; */
+    vertical-align: middle;
+}
+
+input {
+    width: 100%;
+    border-radius: var(--br-small);
+    padding: 20px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    /* Убрали margin-bottom, но вернем его для формы */
+    border: 0;
+}
+input:focus {
+    outline: 0;
+}
+.add_task_form input {
+    margin-bottom: 0;
+}
+
+.button {
+    display: inline-block;
+    font-size: 16px;
+    background-color: var(--color);
+    padding: 15px 25px;
+    border-radius: var(--br-small);
+    border: 0;
+    color: #fff;
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+/* MODAL WEB модульная сетка*/
+.container {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.indent {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.col_5 {
+    width: calc(41.666% - 30px);
+}
+.col_7 {
+    width: calc(58.333% - 30px);
+}
+.col_5,
+.col-7 {
+    margin: 15px;
+    box-sizing: border-box;
+}
+
+/* Login flex */
+.login .container{
+    display: flex;
+    justify-content: center;
+}
+
+/* Notices */
+.notices {
+    position: fixed;
+    top: 0;
+    right: 0;
+    overflow:hidden; 
+}
+.notice {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-more);
+    box-shadow: var(--shadow);
+    border-radius: var(--br);
+    padding: 20px 25px;
+    margin: 25px;
+    position: relative;
+    transform: translateX(120%);
+
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    
+    animation-name: notice_close;
+}
+.notice.active {
+    animation-name: notice;
+}
+@keyframes notice {
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes notice_close {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(120%);
+    }
+}
+
+.notice_img { /*Нормально не получается задать размер по ширине, из-за ширины выше min-width для Img и svg. Поэтому удалю эту минимальную ширину*/
+    width: 35px;
+    height: 35px;
+    background-image: url('/img/notice.svg');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+.notice_img.notice_img_done{
+    background-image: url('/img/checked.png');
+}
+
+body.thema_light .notice_img {
+    background-image: url('/img/notice_light.svg');
+}
+body.thema_light .notice_img_done {
+    background-image: url('/img/checked_light.png');
+}
+.notice_close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    border: 1px solid var(--color-more);
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    color: var(--color-more);
+    line-height: 1;
+    text-align: center;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+}
+.tab {
+    padding: 15px 25px;
+    cursor: pointer;
+}
+.tab_content {
+    display: none;
+}
+.tab_content.active{
+    display: block;
+}
+
+
+
+/* Header */
+/* .thema_button {
+
+} */
+.header .container {
+    /* Чтобы стояли в одну линию */
+    display: flex;
+    align-items: center;
+    /* Чтобы по всей ширине */
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--bg-more);
+}
+.logo {
+    font-weight: 700;
+    font-size: 25px;
+}
+/* Для того, чтобы кнопка смены темы и "Выход" были в одну линию */
+.header_buttons {
+    display: flex;
+    align-items: center;
+}
+/* Создаем фон для thema_button */
+.thema {
+    /* Переменная для ширины круглешка thema_button и паддинга */
+    --width-btn: 30px;
+    --padding-btn: 5px;
+    background-color: var(--bg-more);
+    padding: var(--padding-btn);
+    border-radius: 25px;
+    /* Ширина должна быть больше чем кнопка */
+    width: calc((var(--width-btn) * 2) + (var(--padding-btn) * 2) );
+    display: flex;
+    justify-content: space-between;
+    margin-right: 45px;
+    box-shadow: inset 1px 1px 4px rgba(0,0,0, 0.7);
+    cursor: pointer;
+}
+/* Сама кнопка thema button */
+.thema_button {
+    width: var(--width-btn);
+    height: var(--width-btn);
+    background-color: var(--color);
+    border-radius: 100%;
+    /* Чтобы было плавное переключение. Переключаться будет когда тегу body будем назначать какой-то класс, например "thema_light" */
+    transition: 500ms;
+    background-image: url('/img/moon.png');
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* Когда класс thema_light для body добавлен, то у кнопки thema_button меняется дизайн */
+.thema_light .thema_button {
+    transform: translateX(100%);
+    background-image: url('/img/sun.png');
+}
+
+
+/* Login */
+.tabs_login {
+    width: 500px;
+}
+.tabs_login .tab{
+    width: 100%;
+    /* Также скруглили для вкладок */
+    border-radius: var(--br) var(--br) 0 0;
+    text-align: center;
+
+    font-weight: 700;
+}
+.tabs_login .tab.active{
+    background-color: var(--bg-more);
+}
+.tabs_login .tab_content {
+    background-color: var(--bg-more);
+    padding: 45px;
+    /* Убираем верхнее левое скругление (верхний левый, правый верхний и по часовой далее)*/
+    border-radius: 0 0 var(--br) var(--br);
+    box-shadow: 0 -5px 7px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+/* Footer */
+
+
+
+/* Add task */
+.add_task_form {
+    background-color: var(--bg-more);
+    padding: 25px;
+    border-radius: var(--br);
+    display: flex;
+}
+    /* input count day и input name task зададим фиксированную ширину  */
+.input_count_day {
+    width: 200px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+    /* input_name_task сделаем так, чтобы он растягивался на всю ширину - flex-flow: 1 */
+.input_name_task {
+    flex-grow: 1;
+    /* margin-bottom: 0px; */
+}
+
+/* All tasks */
+.task {
+    background-color: var(--bg-more);
+    padding: 25px;
+    border-radius: var(--br);
+    display: flex;
+    margin-bottom: 25px;
+    align-items: center;
+}
+.done {
+    width: 35px;
+    height: 35px;
+    border-radius: var(--br-small);
+    border: 2px solid var(--color-text);
+    cursor: pointer;
+}
+.count_day {
+    margin-left: 45px;
+    margin-right: 45px;
+}
+.task.checked .done {
+    background: var(--color) url(img/checked.png) no-repeat center / 70%;
+    /* background-color: var(--color) ;
+    background-image: url(img/checked.png);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center; */
+    border: 2px solid var(--color);
+}
+.heading {
+    font-weight: 700;
+    font-size: 20px;
+    flex-grow: 1;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+.update,
+.delete {
+    width: 45px;
+    height: 45px;
+    border-radius: var(--br-small);
+    cursor: pointer;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.update {
+    margin-right: 15px;
+    background-color: var(--color);
+    background-image: url(img/update.png);
+}
+.delete {
+    background-color: var(--color-more);
+    background-image: url(img/delete.png);
+}
+
+.task.editable .update{
+    background-color: var(--color-more);
+    background-image: url(img/save.png)
+}
+.task.editable .heading{
+    background: var(--bg);
+    padding: 10px 15px;
+    border-radius: var(--br-small);
+    box-shadow: inset 2px 2px 10px rgba(0,0,0, 0.7);
+}
+.task.editable .date{
+    background: var(--bg);
+    padding: 14px 15px;
+    border-radius: var(--br-small);
+    box-shadow: inset 2px 2px 10px rgba(0,0,0, 0.7);
+}
